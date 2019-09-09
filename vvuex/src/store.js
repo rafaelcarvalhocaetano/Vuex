@@ -32,17 +32,31 @@ export default new Vuex.Store({
             state.tarefas = payload.tarefas
             // Também funciona
             // state.tarefas = [
-            //     { id: 1, titulo: 'Aprender Vue', concluido: true },
-            //     { id: 2, titulo: 'Aprender Vue Router', concluido: true },
-            //     { id: 3, titulo: 'Aprender Vuex', concluido: false }
+                // { id: 1, titulo: 'Aprender Vue', concluido: true },
+                // { id: 2, titulo: 'Aprender Vue Router', concluido: true },
+                // { id: 3, titulo: 'Aprender Vuex', concluido: false }
             // ]
         }
     },
     // rodando de forma asincrona
     actions: {
         // pode enviar vários commit()
+        buscarTarefas: () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve([
+                        { id: 1, titulo: 'Aprender Vue', concluido: true },
+                        { id: 2, titulo: 'Aprender Vue Router', concluido: true },
+                        { id: 3, titulo: 'Aprender Vuex', concluido: false }
+                    ]);
+                });
+            });
+        },
         listarTarefas: (context, payload) => {
-            context.commit('listarTarefas', payload);
+            // context.commit('listarTarefas', payload);
+            return context.dispatch('buscarTarefas').then(x => {
+                context.commit('listarTarefas', { tarefas: x });
+            });
         }
     }
 });

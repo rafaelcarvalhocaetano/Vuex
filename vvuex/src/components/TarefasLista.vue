@@ -52,7 +52,7 @@
 
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
-import { mapGetters, mapMutations, mapState } from 'vuex';
+import { mapActions, mapGetters, mapMutations, mapState } from 'vuex';
 
 export default {
     components: {
@@ -101,14 +101,19 @@ export default {
         //     ]
         // }),
         // Executando uma ACTION
-        this.$store.dispatch({
-            type: 'listarTarefas',
-            tarefas: [
-                { id: 1, titulo: 'Aprender Vue', concluido: true },
-                { id: 2, titulo: 'Aprender Vue Router', concluido: true },
-                { id: 3, titulo: 'Aprender Vuex', concluido: false }
-            ]
+        // this.$store.dispatch('listarTarefas')
+        this.carregarTarefas().then(() => {
+            console.log(' data 001 ')
         })
+        // this.$store.dispatch({
+        //     type: 'listarTarefas',
+        //     tarefas: []
+            // tarefas: [
+            //     { id: 1, titulo: 'Aprender Vue', concluido: true },
+            //     { id: 2, titulo: 'Aprender Vue Router', concluido: true },
+            //     { id: 3, titulo: 'Aprender Vuex', concluido: false }
+            // ]
+        // })
         // this.$store.dispatch('listarTarefas', {
         //     tarefas: [
         //         { id: 1, titulo: 'Aprender Vue', concluido: true },
@@ -125,6 +130,11 @@ export default {
         //         commit('listarTarefas', payload, options);
         //     }
         // }),
+        ...mapActions({
+            // type: 'listarTarefas'
+            carregarTarefas: 'listarTarefas',
+            listarTarefas: (dispatch, payload, options) => dispatch('listarTarefas', payload, options)
+        }),
         exibirFormularioCriarTarefa() {
             if (this.tarefaSelecionada) {
                 this.tarefaSelecionada = undefined
