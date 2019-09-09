@@ -26,6 +26,7 @@ export default new Vuex.Store({
         // abreviação do metodos
         buscaTarefaPorId: s => id => s.tarefas.find(x => x.id === id)
     },
+    // rodando de forma sincrona
     mutations: {
         listarTarefas: (state, payload) => {
             state.tarefas = payload.tarefas
@@ -35,6 +36,13 @@ export default new Vuex.Store({
             //     { id: 2, titulo: 'Aprender Vue Router', concluido: true },
             //     { id: 3, titulo: 'Aprender Vuex', concluido: false }
             // ]
+        }
+    },
+    // rodando de forma asincrona
+    actions: {
+        // pode enviar vários commit()
+        listarTarefas: (context, payload) => {
+            context.commit('listarTarefas', payload);
         }
     }
 });
