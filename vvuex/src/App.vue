@@ -11,9 +11,9 @@
         <div class="col-sm-9 border-right">
           <TarefasLista />
         </div>
-        <div class="col-dm-3">
+        <!-- <div class="col-dm-3">
           <Contador />
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -21,12 +21,12 @@
 
 <script>
 
-import Contador from '@/components/Contador';
+// import Contador from '@/components/Contador';
 import TarefasLista from '@/components/TarefasLista.vue'
 
 export default {
   components: {
-    Contador,
+    // Contador,
     TarefasLista
     
   }
